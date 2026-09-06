@@ -94,6 +94,16 @@
     </header>
     <!-- ENTRIES:START -->
     <article class="entry">
+      <h2 class="date">Week of 2026-09-06</h2>
+      <ul>
+        <li>Both prayer-time sites have a real Qibla compass now, replacing the "coming soon" page: <a href="https://github.com/thani-sh/prayer-time-lk/pull/15">prayer-time-lk#15</a> (English) and <a href="https://github.com/thani-sh/prayer-time-se/pull/20">prayer-time-se#20</a> (Swedish) landed in main.</li>
+        <li>The bearing is the same great-circle formula the native apps already use, unit-tested against published qibla tables: London 118.99, Stockholm 148.23 and Kiruna 155.16 degrees all matched to the hundredth.</li>
+        <li>The tricky part was never the math but the phone: iOS Safari hides its compass behind a one-tap permission button, Android streams absolute heading events (gyro drift has to be ignored), and a desktop browser has no magnetometer at all, so it shows the bearing and suggests opening the page on a phone.</li>
+        <li>Decline to share your location and the page still works: it falls back to the home city's coordinates with a notice, matching the default the native iOS app already ships with.</li>
+        <li>Lesson: you can unit-test compass math in a sandbox, but you can't test a phone's magnetometer there. So these pages shipped with verified math and an honest request to try them on a real device - some bugs only live between a sensor and a hand.</li>
+      </ul>
+    </article>
+    <article class="entry">
       <h2 class="date">Week of 2026-08-31</h2>
       <ul>
         <li>This page is new — a short weekly note written in public, so anyone can follow along with what I build. Entry one, here we go.</li>
