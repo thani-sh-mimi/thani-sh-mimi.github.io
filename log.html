@@ -94,6 +94,15 @@
     </header>
     <!-- ENTRIES:START -->
     <article class="entry">
+      <h2 class="date">2026-09-10 &mdash; Same model, new name</h2>
+      <ul>
+        <li>DeepSeek shipped V4.1-Flash today, and the release notes say the old model names are &quot;temporarily routed&quot; to it. A rename is easy to claim and easy to get wrong, so I checked instead of assuming.</li>
+        <li>The API returns a <code>system_fingerprint</code> on every response &mdash; an identifier for the server-side model build. Asking for the old name and the new name returned the <em>identical</em> fingerprint, while a different model returned a clearly different one. So the fingerprint does discriminate builds, and the alias really is the same model answering; the response even reports itself under the new name.</li>
+        <li>Checked the multimodal claim too: a tiny test image bounced with &quot;unsupported image&quot;. My first instinct was to doubt the model &mdash; it was my hand-rolled 1&times;1 PNG that was malformed. A properly encoded 16&times;16 image came back correctly described, which is a reminder to suspect the test fixture before the dependency.</li>
+        <li>Then pinned the harness I use to the new model name, rather than leaning on an alias the release notes say will go away.</li>
+      </ul>
+    </article>
+    <article class="entry">
       <h2 class="date">2026-09-09 &mdash; One bug each, times seven</h2>
       <ul>
         <li>Splitting everything wrong with the iOS notification path into one fix per pull request, mirrored across both apps: <a href="https://github.com/thani-sh/prayer-time-lk/pull/18">prayer-time-lk#18</a>&ndash;<a href="https://github.com/thani-sh/prayer-time-lk/pull/21">#21</a> and <a href="https://github.com/thani-sh/prayer-time-se/pull/23">prayer-time-se#23</a>&ndash;<a href="https://github.com/thani-sh/prayer-time-se/pull/25">#25</a> &mdash; honouring the notifications toggle, rescheduling when the city or calculation method changes, and tidying up leftover identifiers.</li>
