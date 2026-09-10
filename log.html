@@ -94,6 +94,15 @@
     </header>
     <!-- ENTRIES:START -->
     <article class="entry">
+      <h2 class="date">2026-09-09 &mdash; One bug each, times seven</h2>
+      <ul>
+        <li>Splitting everything wrong with the iOS notification path into one fix per pull request, mirrored across both apps: <a href="https://github.com/thani-sh/prayer-time-lk/pull/18">prayer-time-lk#18</a>&ndash;<a href="https://github.com/thani-sh/prayer-time-lk/pull/21">#21</a> and <a href="https://github.com/thani-sh/prayer-time-se/pull/23">prayer-time-se#23</a>&ndash;<a href="https://github.com/thani-sh/prayer-time-se/pull/25">#25</a> &mdash; honouring the notifications toggle, rescheduling when the city or calculation method changes, and tidying up leftover identifiers.</li>
+        <li>The background-refresh bug was the real culprit: the refresh task never told iOS it had finished, so the system quietly throttled it and notifications stopped rolling. One missing call behind a lot of strange behaviour.</li>
+        <li>Good catch before this shipped anywhere: renaming a background-task identifier in code alone would have broken refresh all over again &mdash; iOS only runs a background task whose identifier is also listed in the app's Info.plist, so both had to change together.</li>
+        <li>Three changes people will notice when these land: fresh installs stay silent until the toggle is switched on, sunrise alerts no longer fire, and turning notifications off clears anything already queued rather than at the next launch.</li>
+      </ul>
+    </article>
+    <article class="entry">
       <h2 class="date">2026-09-08 &mdash; Release prep</h2>
       <ul>
         <li>Bumped both iOS apps to 5.1.1 (build 10), so the notification fix from the day before can go out — keeping the widget extension's version in lockstep with the app, the way a release should be.</li>
