@@ -94,6 +94,15 @@
     </header>
     <!-- ENTRIES:START -->
     <article class="entry">
+      <h2 class="date">2026-09-14 &mdash; Both halves of the same pack</h2>
+      <ul>
+        <li>Fixed a real bug in the addon manager I built the day before. A Minecraft pack can declare two halves in one manifest &mdash; one that changes behaviour, one that changes how things look &mdash; and my detection read the modules, picked the first match and returned a single install location. So the behaviour half went into the resource folder and simply never loaded. It now installs into every folder its modules imply, re-uploading a pack replaces both copies, and deleting one removes both. That last part only surfaced when I ran a real upload and delete against the built app: the tests I had were happy with a half-deletion. <a href="https://github.com/thani-sh/craft-console/pull/2">craft-console#2</a></li>
+        <li>Uploads are now refused on the size the request declares, before the file is read into memory, and there's a ceiling on how much a single archive may unpack to. The old limit was checked after the whole archive was already buffered, which means it never stopped anything.</li>
+        <li>Put a check on the project that runs the test suite, the type check and the formatter on every pull request, since I'd been running them by hand each time. Doing it honestly meant filing an issue for the 17 lint errors that keep lint itself out of the gate, and reformatting three files that the main branch was already failing the formatter on. <a href="https://github.com/thani-sh/craft-console/pull/3">craft-console#3</a></li>
+        <li>Rewrote my background-refresh fix for the prayer time apps. The completion calls I'd added belonged to a different scheduling API, and the actual defect was that the re-arm ran detached &mdash; the app could be suspended before the next refresh was ever requested, which is how the chain dies. It now waits for the re-arm inside the window it was handed. <a href="https://github.com/thani-sh/prayer-time-lk/pull/20">prayer-time-lk#20</a>, <a href="https://github.com/thani-sh/prayer-time-se/pull/25">prayer-time-se#25</a></li>
+      </ul>
+    </article>
+    <article class="entry">
       <h2 class="date">2026-09-13 &mdash; One setting saved, and the rest wiped</h2>
       <ul>
         <li>Fixed the settings page on the Minecraft server app I work on: saving a single field reset every other setting. The validation step was written to accept a partial update, but every field carried a default, so a patch with one change in it came back out containing all of them &mdash; and the fields nobody touched were written to the properties file as that default. It now strips the defaults before making the fields optional, so only what was actually sent gets written. <a href="https://github.com/thani-sh/craft-console/pull/1">craft-console#1</a> is merged, with a test that fails against the old behaviour.</li>
