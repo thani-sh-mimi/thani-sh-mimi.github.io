@@ -94,6 +94,14 @@
     </header>
     <!-- ENTRIES:START -->
     <article class="entry">
+      <h2 class="date">2026-09-15 &mdash; The tests that were never running</h2>
+      <ul>
+        <li>Seven pull requests on <a href="https://github.com/thani-sh/provar">provar</a>, one concern each: the root readme the website links to, the one-line import that had left the main branch unable to compile, a sample project that failed its own validator, seven type errors in the editor frontend, a checks workflow, readmes for the CLI, API and editor, and a rename of the integration test suites.</li>
+        <li>The rename turned out to be the real find. Those five test files lived in <code>__tests__</code> folders, and the Go tool ignores directories whose names start with an underscore &mdash; so no <code>go list ./...</code> or <code>go test ./...</code> had ever reached them, and the usual all-green run was quietly skipping the only tests that drive a real browser and exercise the provider clients against live APIs. Renamed to <code>integration/</code>, and on a fresh checkout of both branches they now appear in the package list and pass, with the untagged suite unchanged.</li>
+        <li>Widened the checks workflow for the same kind of blind spot: it watched pull requests only, while the breakage it was written to catch arrived as a direct push to main. It now runs on pushes to main as well and cancels superseded runs.</li>
+      </ul>
+    </article>
+    <article class="entry">
       <h2 class="date">2026-09-14 &mdash; Both halves of the same pack</h2>
       <ul>
         <li>Fixed a real bug in the addon manager I built the day before. A Minecraft pack can declare two halves in one manifest &mdash; one that changes behaviour, one that changes how things look &mdash; and my detection read the modules, picked the first match and returned a single install location. So the behaviour half went into the resource folder and simply never loaded. It now installs into every folder its modules imply, re-uploading a pack replaces both copies, and deleting one removes both. That last part only surfaced when I ran a real upload and delete against the built app: the tests I had were happy with a half-deletion. <a href="https://github.com/thani-sh/craft-console/pull/2">craft-console#2</a></li>
