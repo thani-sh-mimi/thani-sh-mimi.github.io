@@ -1,0 +1,58 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "hermes-agent",
+  "elements": [
+    { "type": "text", "id": "title", "x": 20, "y": 8, "width": 380, "height": 28,
+      "text": "Why the integration suites never ran", "fontSize": 20, "fontFamily": 1,
+      "strokeColor": "#1e1e1e", "originalText": "Why the integration suites never ran", "autoResize": true },
+
+    { "type": "rectangle", "id": "before", "x": 20, "y": 56, "width": 380, "height": 76,
+      "roundness": { "type": 3 }, "backgroundColor": "#fff3bf", "fillStyle": "solid",
+      "strokeStyle": "dashed",
+      "boundElements": [{ "id": "t_before", "type": "text" }] },
+    { "type": "text", "id": "t_before", "x": 40, "y": 76, "width": 340, "height": 36,
+      "text": "libs/engine/__tests__/",
+      "fontSize": 16, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "before", "originalText": "libs/engine/__tests__/", "autoResize": false },
+
+    { "type": "text", "id": "why1", "x": 20, "y": 148, "width": 380, "height": 44,
+      "text": "The Go tool skips folders starting with \"_\",\nso ./... never reaches these files.",
+      "fontSize": 16, "fontFamily": 1, "strokeColor": "#757575",
+      "originalText": "The Go tool skips folders starting with \"_\",\nso ./... never reaches these files.", "autoResize": true },
+
+    { "type": "text", "id": "list1", "x": 20, "y": 203, "width": 380, "height": 22,
+      "text": "go list ./... -> 20 packages, none of them the suites",
+      "fontSize": 16, "fontFamily": 1, "strokeColor": "#757575",
+      "originalText": "go list ./... -> 20 packages, none of them the suites", "autoResize": true },
+
+    { "type": "arrow", "id": "rename", "x": 210, "y": 238, "width": 0, "height": 52,
+      "points": [[0, 0], [0, 52]], "endArrowhead": "arrow",
+      "boundElements": [{ "id": "t_rename", "type": "text" }] },
+    { "type": "text", "id": "t_rename", "x": 222, "y": 250, "width": 80, "height": 22,
+      "text": "renamed", "fontSize": 16, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "left", "verticalAlign": "middle",
+      "containerId": "rename", "originalText": "renamed", "autoResize": false },
+
+    { "type": "rectangle", "id": "after", "x": 20, "y": 302, "width": 380, "height": 76,
+      "roundness": { "type": 3 }, "backgroundColor": "#b2f2bb", "fillStyle": "solid",
+      "boundElements": [{ "id": "t_after", "type": "text" }] },
+    { "type": "text", "id": "t_after", "x": 40, "y": 322, "width": 340, "height": 36,
+      "text": "libs/engine/integration/",
+      "fontSize": 16, "fontFamily": 1, "strokeColor": "#1e1e1e",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "after", "originalText": "libs/engine/integration/", "autoResize": false },
+
+    { "type": "text", "id": "why2", "x": 20, "y": 394, "width": 380, "height": 44,
+      "text": "A plain folder name, so the tagged\nfiles are found again.",
+      "fontSize": 16, "fontFamily": 1, "strokeColor": "#757575",
+      "originalText": "A plain folder name, so the tagged\nfiles are found again.", "autoResize": true },
+
+    { "type": "text", "id": "list2", "x": 20, "y": 449, "width": 380, "height": 22,
+      "text": "go test -tags integration ./... -> both suites, and they run",
+      "fontSize": 16, "fontFamily": 1, "strokeColor": "#757575",
+      "originalText": "go test -tags integration ./... -> both suites, and they run", "autoResize": true }
+  ],
+  "appState": { "viewBackgroundColor": "#ffffff" }
+}

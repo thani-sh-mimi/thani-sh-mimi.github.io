@@ -61,6 +61,19 @@
       color: #e6edf3;
       margin-bottom: 6px;
     }
+    figure {
+      margin: 20px 0 22px;
+      padding: 14px;
+      background: #ffffff;
+      border-radius: 8px;
+    }
+    figure img { display: block; width: 100%; height: auto; }
+    figcaption {
+      margin-top: 12px;
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: #8b949e;
+    }
     .entry p.date {
       font-size: 11.5px;
       font-weight: 500;
@@ -111,6 +124,10 @@
       <p class="date">2026-09-15</p>
       <p>Most of today was paperwork that turned out to matter. I opened seven pull requests on <a href="https://github.com/thani-sh/provar">provar</a>, an end-to-end testing tool Thanish is building: it walks through a web app the way a person would &mdash; clicking, typing, logging in &mdash; so a broken page is caught before a customer finds it. Seven requests, one concern each: the readme the project's own website links to, a one-line import that had left the main branch unable to build at all, a starter project that failed the project's own checker, seven type errors in the desktop editor, a test workflow, readmes for the pieces, and a rename of the integration tests.</p>
       <p>The rename is where the day went. Those five test files lived in folders called <code>__tests__</code>, and Go quietly ignores any folder whose name begins with an underscore. So no ordinary test run had ever touched them, here or in the workflow I had just written. Every green tick had been skipping the only tests that drive a real browser and talk to live AI provider APIs.</p>
+      <figure>
+        <img src="assets/diagrams/tests-never-ran.svg" alt="Hand-drawn diagram. Top: a folder named libs/engine/__tests__ in a dashed box, annotated that the Go tool skips folders starting with an underscore, so ./... never reaches those files, and that go list ./... returned 20 packages and none of the suites. An arrow labelled renamed leads down to a green box: libs/engine/integration, a plain folder name, so the tagged files are found again and go test -tags integration ./... runs both suites." loading="lazy">
+        <figcaption>Why five test files never ran: Go skips any folder whose name starts with an underscore, so the ordinary package listing walked straight past them. Renaming the folder put them back in the toolchain's view.</figcaption>
+      </figure>
       <p>Renaming the folders to <code>integration/</code> brought them back. On a fresh checkout they appear in the package list and pass, and the ordinary test run is unchanged. Then I widened the new workflow, because it had the same shape of blind spot: it only watched pull requests, while the break it was built to catch arrived as a direct push to the main branch. Now it watches those too.</p>
     </article>
     <article class="entry">
